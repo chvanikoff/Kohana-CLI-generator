@@ -1,0 +1,85 @@
+Installation:
+just add link to this module in Kohana::modules() in bootstrap.php
+
+Usage:
+navigate to your docroot (where index.php locates) via CLI
+run "php index.php --uri=generate/model" to run jelly-models generator
+or "php index.php --uri=generate/controller" to run controllers generator
+
+Model-generator usage:
+syntax of commands to generate models:
+MODEL_NAME(|TABLE_NAME)
+if you will run
+CLI-generator>Model> user_metadata|my_users_meta
+this will create model Model_User_Metadata with such schema:
+<?php
+
+class Model_User_Metadata extends Jelly_Model {
+    
+    public static function initialize(Jelly_Meta $meta)
+    {
+        $meta->fields(array(
+            
+        ))->table('my_users_meta');
+    }
+}
+
+?>
+The file location will be "application/classes/model/user/metadata.php"
+
+if no table specifyed (in case it's name satisfyes ORM standards) - it will not add call to table() method of ORM
+Example:
+CLI-generator>Model> user
+this will create model Model_User with schema:
+<?php
+
+class Model_Seller extends Jelly_Model {
+    
+    public static function initialize(Jelly_Meta $meta)
+    {
+        $meta->fields(array(
+            
+        ));
+    }
+}
+
+?>
+
+Controller-generator usage:
+syntax of commands to generate controllers:
+CONTROLLER_NAME(.PARENT_CONTROLLER)(|ACTION1|ACTION2|ACTION...)
+CONTROLLER_NAME - name of controller that you want to generate. Without prefix "Controller_".
+PARENT_CONTROLLER - name of controller that your generated controller will extend. Without prefix "Controller_". Default value: "Controller".
+ACTION1, ACTION2 etc. - actions that will be generated.
+Examples of usage:
+CLI-generator>Controller> user.template|create|read|update|delete
+will generate this controller:
+<?php
+
+class Controller_User extends Controller_Template {
+
+    public function action_create() {
+        
+    }
+
+    public function action_read() {
+        
+    }
+
+    public function action_update() {
+        
+    }
+
+    public function action_delete() {
+        
+    }
+}
+
+?>
+
+About the module:
+I know many things are not perfect here, the code in some places possibly awful... But:
+1) It works
+2) I will work on the module if someone else will be interested in it.
+
+All bugfixes, comments, advices etc. (any response) are appreciated.
