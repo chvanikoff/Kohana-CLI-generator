@@ -207,7 +207,8 @@ class Controller_Generator extends Kohana_Controller {
         {
             $actions_string .= '
 
-    public function action_'.$action.'() {
+    public function action_'.$action.'()
+    {
         
     }';
         }
